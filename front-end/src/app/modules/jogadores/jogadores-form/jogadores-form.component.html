@@ -1,0 +1,50 @@
+<div class="jogadores-form">
+  <div class="page-header">
+    <h1>{{ isEditMode ? '✏️ Editar Jogador' : '➕ Novo Jogador' }}</h1>
+  </div>
+
+  <div class="error-message" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="form-group">
+        <label for="nome">Nome do Jogador *</label>
+        <input
+          id="nome"
+          type="text"
+          formControlName="nome"
+          placeholder="Digite o nome do jogador"
+          [class.invalid]="form.get('nome')?.invalid && form.get('nome')?.touched"
+        />
+        <span class="error-text" *ngIf="getErrorMessage('nome')">
+          {{ getErrorMessage('nome') }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="saldo">Saldo Inicial *</label>
+        <input
+          id="saldo"
+          type="number"
+          formControlName="saldo"
+          placeholder="Digite o saldo inicial"
+          [class.invalid]="form.get('saldo')?.invalid && form.get('saldo')?.touched"
+        />
+        <span class="error-text" *ngIf="getErrorMessage('saldo')">
+          {{ getErrorMessage('saldo') }}
+        </span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Salvando...' : 'Salvar Jogador' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()" [disabled]="loading">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

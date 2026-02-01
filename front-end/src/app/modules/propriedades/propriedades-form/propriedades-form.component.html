@@ -1,0 +1,62 @@
+<div class="propriedades-form">
+  <div class="page-header">
+    <h1>{{ isEditMode ? '✏️ Editar Propriedade' : '➕ Nova Propriedade' }}</h1>
+  </div>
+
+  <div class="error-message" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="form-group">
+        <label for="nome">Nome da Propriedade *</label>
+        <input
+          id="nome"
+          type="text"
+          formControlName="nome"
+          placeholder="Ex: Avenida Atlântica"
+          [class.invalid]="form.get('nome')?.invalid && form.get('nome')?.touched"
+        />
+        <span class="error-text" *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">
+          <ng-container *ngIf="form.get('nome')?.errors?.['required']">Nome é obrigatório</ng-container>
+          <ng-container *ngIf="form.get('nome')?.errors?.['minlength']">Nome deve ter pelo menos 3 caracteres</ng-container>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="valor">Valor da Propriedade *</label>
+        <input
+          id="valor"
+          type="number"
+          formControlName="valor"
+          placeholder="Ex: 200"
+          [class.invalid]="form.get('valor')?.invalid && form.get('valor')?.touched"
+        />
+        <span class="error-text" *ngIf="form.get('valor')?.invalid && form.get('valor')?.touched">
+          <ng-container *ngIf="form.get('valor')?.errors?.['required']">Valor é obrigatório</ng-container>
+          <ng-container *ngIf="form.get('valor')?.errors?.['min']">Valor não pode ser negativo</ng-container>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="jogador_id">Proprietário (Opcional)</label>
+        <select id="jogador_id" formControlName="jogador_id">
+          <option [value]="null">Sem proprietário</option>
+          <option *ngFor="let jogador of jogadores" [value]="jogador.id">
+            {{ jogador.nome }} - {{ jogador.saldo | currency:'BRL' }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loading || form.invalid">
+          {{ loading ? 'Salvando...' : 'Salvar Propriedade' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()" [disabled]="loading">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

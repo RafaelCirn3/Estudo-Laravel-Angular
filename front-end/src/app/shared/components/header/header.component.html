@@ -1,0 +1,33 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/home" (click)="closeMenus()">
+        <h1>🎲 Banco Imobiliário</h1>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-item" [class.active]="jogadoresMenuOpen">
+        <button class="nav-button" (click)="toggleJogadoresMenu()">
+          Jogadores
+          <span class="arrow" [class.rotate]="jogadoresMenuOpen">▼</span>
+        </button>
+        <div class="dropdown" *ngIf="jogadoresMenuOpen">
+          <a routerLink="/jogadores/lista" (click)="closeMenus()">📋 Listar Jogadores</a>
+          <a routerLink="/jogadores/criar" (click)="closeMenus()">➕ Criar Jogador</a>
+        </div>
+      </div>
+
+      <div class="nav-item" [class.active]="propriedadesMenuOpen">
+        <button class="nav-button" (click)="togglePropriedadesMenu()">
+          Propriedades
+          <span class="arrow" [class.rotate]="propriedadesMenuOpen">▼</span>
+        </button>
+        <div class="dropdown" *ngIf="propriedadesMenuOpen">
+          <a routerLink="/propriedades/lista" (click)="closeMenus()">📋 Listar Propriedades</a>
+          <a routerLink="/propriedades/criar" (click)="closeMenus()">➕ Criar Propriedade</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

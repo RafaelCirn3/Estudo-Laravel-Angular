@@ -1,0 +1,52 @@
+<div class="home">
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">🎲 Bem-vindo ao Banco Imobiliário</h1>
+      <p class="hero-subtitle">
+        Sistema completo de gerenciamento para o clássico jogo de tabuleiro
+      </p>
+      <div class="hero-buttons">
+        <a routerLink="/jogadores/criar" class="btn btn-primary">Criar Jogador</a>
+        <a routerLink="/propriedades/criar" class="btn btn-secondary">Criar Propriedade</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <h2>Sobre o Sistema</h2>
+      <p>
+        Este é um sistema desenvolvido para facilitar o gerenciamento de partidas do Banco Imobiliário.
+        Com ele, você pode cadastrar jogadores, gerenciar propriedades, realizar transações e muito mais!
+      </p>
+      <p>
+        Desenvolvido com as tecnologias mais modernas: <strong>Angular</strong> no front-end e 
+        <strong>Laravel</strong> no back-end, oferecendo uma experiência rápida, segura e intuitiva.
+      </p>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>Funcionalidades Principais</h2>
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let feature of features">
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Pronto para começar?</h2>
+      <p>Comece criando jogadores e propriedades para sua partida!</p>
+      <div class="cta-buttons">
+        <a routerLink="/jogadores/lista" class="btn btn-outline">Ver Jogadores</a>
+        <a routerLink="/propriedades/lista" class="btn btn-outline">Ver Propriedades</a>
+      </div>
+    </div>
+  </section>
+</div>

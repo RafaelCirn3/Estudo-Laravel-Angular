@@ -1,0 +1,50 @@
+<div class="jogadores-list">
+  <div class="page-header">
+    <h1>👥 Gerenciar Jogadores</h1>
+    <a routerLink="/jogadores/criar" class="btn btn-primary">
+      <span>➕</span> Novo Jogador
+    </a>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p>Carregando jogadores...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p>{{ error }}</p>
+    <button (click)="carregar()" class="btn btn-secondary">Tentar Novamente</button>
+  </div>
+
+  <div class="table-container" *ngIf="!loading && !error">
+    <table class="table" *ngIf="jogadores.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Saldo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jogador of jogadores">
+          <td>{{ jogador.id }}</td>
+          <td>{{ jogador.nome }}</td>
+          <td class="saldo">{{ jogador.saldo | currency:'BRL' }}</td>
+          <td class="actions">
+            <a [routerLink]="['/jogadores/editar', jogador.id]" class="btn-action btn-edit" title="Editar">
+              ✏️
+            </a>
+            <button (click)="excluir(jogador.id!, jogador.nome)" class="btn-action btn-delete" title="Excluir">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty-state" *ngIf="jogadores.length === 0">
+      <p>📭 Nenhum jogador cadastrado.</p>
+      <a routerLink="/jogadores/criar" class="btn btn-primary">Criar Primeiro Jogador</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<h2>Jogadores</h2>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Saldo</th>
+  </tr>
+  <tr *ngFor="let j of jogadores">
+    <td>{{ j.nome }}</td>
+    <td>R$ {{ j.saldo }}</td>
+  </tr>
+</table>

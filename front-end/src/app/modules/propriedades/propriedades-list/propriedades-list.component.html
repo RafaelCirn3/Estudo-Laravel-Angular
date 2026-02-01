@@ -1,0 +1,55 @@
+<div class="propriedades-list">
+  <div class="page-header">
+    <h1>🏠 Gerenciar Propriedades</h1>
+    <a routerLink="/propriedades/criar" class="btn btn-primary">
+      <span>➕</span> Nova Propriedade
+    </a>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p>Carregando propriedades...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p>{{ error }}</p>
+    <button (click)="carregar()" class="btn btn-secondary">Tentar Novamente</button>
+  </div>
+
+  <div class="table-container" *ngIf="!loading && !error">
+    <table class="table" *ngIf="propriedades.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Proprietário</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prop of propriedades">
+          <td>{{ prop.id }}</td>
+          <td>{{ prop.nome }}</td>
+          <td class="valor">{{ prop.valor | currency:'BRL' }}</td>
+          <td>
+            <span *ngIf="prop.jogador">{{ prop.jogador.nome }}</span>
+            <span *ngIf="!prop.jogador" class="disponivel">Disponível</span>
+          </td>
+          <td class="actions">
+            <a [routerLink]="['/propriedades/editar', prop.id]" class="btn-action btn-edit" title="Editar">
+              ✏️
+            </a>
+            <button (click)="excluir(prop.id!, prop.nome)" class="btn-action btn-delete" title="Excluir">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty-state" *ngIf="propriedades.length === 0">
+      <p>📭 Nenhuma propriedade cadastrada.</p>
+      <a routerLink="/propriedades/criar" class="btn btn-primary">Criar Primeira Propriedade</a>
+    </div>
+  </div>
+</div>
